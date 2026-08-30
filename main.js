@@ -1,21 +1,18 @@
-// Initialize Lucide Icons
+// Initialize Icons
 lucide.createIcons();
 
-// --- NAVIGATION LOGIC ---
 const navItems = document.querySelectorAll('.nav-item');
 const pages = document.querySelectorAll('.page');
 const pageTitle = document.getElementById('page-title');
 
+// --- NAVIGATION & ANIMATION LOGIC ---
 navItems.forEach(item => {
     item.addEventListener('click', (e) => {
         e.preventDefault();
         
-        // Remove active class from all nav items
+        // Update active states
         navItems.forEach(nav => nav.classList.remove('active'));
-        // Add to clicked
         item.classList.add('active');
-
-        // Update Title
         pageTitle.innerText = item.innerText;
 
         // Hide all pages
@@ -23,79 +20,119 @@ navItems.forEach(item => {
         
         // Show target page
         const targetId = item.getAttribute('data-target');
-        document.getElementById(targetId).classList.add('active');
+        const targetPage = document.getElementById(targetId);
+        targetPage.classList.add('active');
+
+        // Trigger Staggered Animations
+        const staggerItems = targetPage.querySelectorAll('.stagger-item');
+        staggerItems.forEach((el, index) => {
+            el.style.animation = 'none'; // reset
+            el.offsetHeight; // trigger reflow
+            el.style.animation = `slideUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards`;
+            el.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Trigger Dynamic Progress Bars
+        const progressBars = targetPage.querySelectorAll('.progress');
+        progressBars.forEach(bar => {
+            bar.style.width = '0';
+            setTimeout(() => {
+                bar.style.width = bar.getAttribute('data-width');
+            }, 300); // Wait for page to render
+        });
     });
 });
 
-// --- AI SCANNER SIMULATION ---
+// Init first page animations
+document.querySelector('.nav-item.active').click();
+
+// --- AI SCANNER ---
 function startScan() {
-    const uploadZone = document.getElementById('upload-zone');
-    const scanningUI = document.getElementById('scanning-ui');
-    const scanResults = document.getElementById('scan-results');
+    document.getElementById('upload-zone').classList.add('hidden');
+    document.getElementById('scanning-ui').classList.remove('hidden');
 
-    // Switch UI to Scanning
-    uploadZone.classList.add('hidden');
-    scanningUI.classList.remove('hidden');
-
-    // Simulate Processing Time (3 seconds)
     setTimeout(() => {
-        scanningUI.classList.add('hidden');
-        scanResults.classList.remove('hidden');
-    }, 3000);
+        document.getElementById('scanning-ui').classList.add('hidden');
+        const results = document.getElementById('scan-results');
+        results.classList.remove('hidden');
+        
+        // Animate result items
+        results.querySelectorAll('.stagger-item').forEach((el, index) => {
+            el.style.animation = 'none'; el.offsetHeight;
+            el.style.animation = `slideUp 0.5s ease forwards`;
+            el.style.animationDelay = `${index * 0.1}s`;
+        });
+    }, 2500);
 }
 
 function resetScan() {
     document.getElementById('upload-zone').classList.remove('hidden');
-    document.getElementById('scanning-ui').classList.add('hidden');
     document.getElementById('scan-results').classList.add('hidden');
 }
 
-// --- CIRCULAR PART BANK DATA & FILTERING ---
+// --- CIRCULAR PART BANK & MODAL ---
 const partsData = [
-    { name: "DDR4 8GB RAM", category: "memory", condition: "Good", qty: 24, comp: "Universal Notebook", use: "Refurbishment" },
-    { name: "Laptop Cooling Fan", category: "cooling", condition: "Good", qty: 12, comp: "ThinkPad T-Series", use: "Repair / Upcycle" },
-    { name: "512GB M.2 NVMe SSD", category: "storage", condition: "Excellent", qty: 8, comp: "Universal", use: "Refurbishment" },
-    { name: "ThinkPad Keyboard", category: "input", condition: "Fair", qty: 5, comp: "ThinkPad T480/T470", use: "Repair" },
-    { name: "1TB 2.5 SATA HDD", category: "storage", condition: "Good", qty: 15, comp: "Legacy Laptops", use: "External Storage Upcycle" },
-    { name: "DDR3 4GB RAM", category: "memory", condition: "Fair", qty: 30, comp: "Older Generation", use: "Low-end Refurbish" }
+    { name: "DDR4 8GB RAM", category: "memory", condition: "Good", qty: 24, comp: "Universal", use: "Refurbishment" },
+    { name: "Laptop Cooling Fan", category: "cooling", condition: "Good", qty: 12, comp: "ThinkPad T-Series", use: "Upcycle" },
+    { name: "512GB M.2 NVMe SSD", category: "storage", condition: "Excellent", qty: 8, comp: "Universal", use: "Refurbishment" }
 ];
 
 const partGrid = document.getElementById('part-grid');
 
 function renderParts(filter = 'all') {
-    partGrid.innerHTML = ''; // Clear current
-    
-    const filteredParts = filter === 'all' 
-        ? partsData 
-        : partsData.filter(p => p.category === filter);
+    partGrid.innerHTML = '';
+    const filteredParts = filter === 'all' ? partsData : partsData.filter(p => p.category === filter);
 
-    filteredParts.forEach(part => {
+    filteredParts.forEach((part, index) => {
         const card = document.createElement('div');
-        card.className = 'part-card';
+        card.className = 'part-card stagger-item';
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.onclick = () => openModal('partDetail', part); // Interactive Click
         card.innerHTML = `
-            <h3>${part.name}</h3>
-            <div class="part-info"><span class="label">Condition:</span> <strong>${part.condition}</strong></div>
-            <div class="part-info"><span class="label">Quantity:</span> <strong>${part.qty} units</strong></div>
-            <div class="part-info"><span class="label">Compatible:</span> <span>${part.comp}</span></div>
-            <div class="part-info"><span class="label">Potential Use:</span> <span>${part.use}</span></div>
+            <h3 style="color:var(--primary); margin-bottom:12px;">${part.name}</h3>
+            <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:8px;">Qty: <strong>${part.qty}</strong> | Cond: <strong>${part.condition}</strong></p>
             <div class="part-tag">${part.category.toUpperCase()}</div>
         `;
         partGrid.appendChild(card);
     });
 }
-
-// Initial Render
 renderParts();
 
-// Filter Event Listeners
-const filterBtns = document.querySelectorAll('.filter-btn');
-filterBtns.forEach(btn => {
+document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        // Update active class
-        filterBtns.forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        
-        // Render
         renderParts(btn.getAttribute('data-filter'));
     });
 });
+
+// --- MODAL SYSTEM ---
+const modal = document.getElementById('modalOverlay');
+const modalTitle = document.getElementById('modalTitle');
+const modalBody = document.getElementById('modalBody');
+
+function openModal(type, data = null) {
+    modal.classList.remove('hidden');
+    if(type === 'registerModal') {
+        modalTitle.innerText = "Register New Device";
+        modalBody.innerHTML = `
+            <p style="color:var(--text-muted); font-size:0.9rem;">Connecting to Enterprise Resource System...</p>
+            <div style="margin-top:30px; text-align:center;"><i data-lucide="loader" class="spin-icon"></i></div>
+        `;
+    } else if (type === 'partDetail') {
+        modalTitle.innerText = "Component Details";
+        modalBody.innerHTML = `
+            <h3 style="color:var(--secondary); margin-bottom:15px;">${data.name}</h3>
+            <p><strong>Condition:</strong> ${data.condition}</p>
+            <p><strong>Stock:</strong> ${data.qty} Units</p>
+            <p><strong>Compatibility:</strong> ${data.comp}</p>
+            <p><strong>Recommended Use:</strong> ${data.use}</p>
+            <button class="btn btn-primary" style="margin-top:20px; width:100%; justify-content:center;">Request Component</button>
+        `;
+    }
+    lucide.createIcons(); // re-init icons inside modal
+}
+
+function closeModal() {
+    modal.classList.add('hidden');
+}

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGEN-D | Circular Laptop Ecosystem</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">
+            <i data-lucide="recycle" class="logo-icon"></i>
+            <h2>REGEN-D</h2>
+        </div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active" data-target="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</a>
+            <a href="#" class="nav-item" data-target="scanner"><i data-lucide="scan-line"></i> AI Scanner</a>
+            <a href="#" class="nav-item" data-target="gate"><i data-lucide="traffic-cone"></i> Repairability Gate</a>
+            <a href="#" class="nav-item" data-target="passport"><i data-lucide="book-open-check"></i> Device Passport</a>
+            <a href="#" class="nav-item" data-target="health"><i data-lucide="activity"></i> Device Health</a>
+            <a href="#" class="nav-item" data-target="match"><i data-lucide="wrench"></i> Repair Match</a>
+            <a href="#" class="nav-item" data-target="part-bank"><i data-lucide="cpu"></i> Circular Part Bank</a>
+            <a href="#" class="nav-item" data-target="route"><i data-lucide="git-branch"></i> Circular Route</a>
+            <a href="#" class="nav-item" data-target="value-loop"><i data-lucide="circle-dollar-sign"></i> Value Loop</a>
+            <a href="#" class="nav-item" data-target="impact"><i data-lucide="leaf"></i> Impact Dashboard</a>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <h1 id="page-title">Dashboard</h1>
+            <div class="topbar-actions">
+                <button class="btn btn-primary"><i data-lucide="plus-circle"></i> Register Device</button>
+                <div class="icon-btn"><i data-lucide="bell"></i></div>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=103A36&color=fff" alt="User">
+                </div>
+            </div>
+        </header>
+
+        <div class="page-container">
+            
+            <!-- 1. DASHBOARD -->
+            <section id="dashboard" class="page active">
+                <div class="grid-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i data-lucide="laptop"></i></div>
+                        <div class="stat-info">
+                            <p>Registered Devices</p>
+                            <h3>24</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i data-lucide="wrench"></i></div>
+                        <div class="stat-info">
+                            <p>Repair Opportunities</p>
+                            <h3>12</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i data-lucide="cpu"></i></div>
+                        <div class="stat-info">
+                            <p>Recovered Components</p>
+                            <h3>148</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-icon"><i data-lucide="banknote"></i></div>
+                        <div class="stat-info">
+                            <p>Value Recovered</p>
+                            <h3>Rp 4.2M</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i data-lucide="trash-2"></i></div>
+                        <div class="stat-info">
+                            <p>E-Waste Avoided</p>
+                            <h3>126 kg</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card highlight-alt">
+                        <div class="stat-icon"><i data-lucide="refresh-cw"></i></div>
+                        <div class="stat-info">
+                            <p>Circularity Score</p>
+                            <h3>75%</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. AI LAPTOP SCANNER -->
+            <section id="scanner" class="page">
+                <div class="scanner-container">
+                    <div class="upload-zone" id="upload-zone">
+                        <i data-lucide="image-plus"></i>
+                        <h3>Upload Laptop Image</h3>
+                        <p>Drag and drop or click to browse</p>
+                        <button class="btn btn-secondary" onclick="startScan()">Start AI Inspection</button>
+                    </div>
+
+                    <div class="scanning-ui hidden" id="scanning-ui">
+                        <div class="scanner-frame">
+                            <div class="scan-line"></div>
+                            <i data-lucide="laptop" class="large-icon"></i>
+                        </div>
+                        <h3 class="pulse-text">AI is analyzing physical condition...</h3>
+                    </div>
+
+                    <div class="scan-results hidden" id="scan-results">
+                        <div class="result-header">
+                            <div>
+                                <p class="muted">Detected Device</p>
+                                <h2>Lenovo ThinkPad T480</h2>
+                            </div>
+                            <div class="score-circle">
+                                <span class="score-num">86</span>
+                                <span class="score-max">/ 100</span>
+                            </div>
+                        </div>
+
+                        <div class="conditions-grid">
+                            <div class="condition-item good"><i data-lucide="check-circle"></i> Screen: Good</div>
+                            <div class="condition-item good"><i data-lucide="check-circle"></i> Keyboard: Good</div>
+                            <div class="condition-item warn"><i data-lucide="alert-triangle"></i> Battery: Degraded</div>
+                            <div class="condition-item good"><i data-lucide="check-circle"></i> RAM: Functional</div>
+                            <div class="condition-item good"><i data-lucide="check-circle"></i> Storage: Functional</div>
+                            <div class="condition-item warn"><i data-lucide="alert-triangle"></i> Casing: Minor damage</div>
+                        </div>
+
+                        <div class="recommendation-box">
+                            <p class="muted">Recommended Path</p>
+                            <h3>REPAIR + REFURBISH</h3>
+                        </div>
+
+                        <div class="disclaimer">
+                            <i data-lucide="info"></i>
+                            <p>AI provides preliminary visual screening. Final technical diagnosis requires technician validation.</p>
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="resetScan()">Scan Another Device</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. REPAIRABILITY GATE -->
+            <section id="gate" class="page">
+                <div class="gate-grid">
+                    <div class="gate-card gate-green">
+                        <div class="gate-header">
+                            <div class="light green-light"></div>
+                            <h2>REGENERATE</h2>
+                        </div>
+                        <p class="gate-desc">Laptop is economically and technically feasible to repair.</p>
+                        <div class="gate-path">Repair &rarr; Upgrade &rarr; Refurbish &rarr; Second Life</div>
+                    </div>
+
+                    <div class="gate-card gate-yellow">
+                        <div class="gate-header">
+                            <div class="light yellow-light"></div>
+                            <h2>HARVEST</h2>
+                        </div>
+                        <p class="gate-desc">Laptop cannot be fully restored, but components remain functional.</p>
+                        <div class="gate-path">Component Harvesting &rarr; Circular Part Bank &rarr; Reuse</div>
+                    </div>
+
+                    <div class="gate-card gate-red">
+                        <div class="gate-header">
+                            <div class="light red-light"></div>
+                            <h2>RECYCLE</h2>
+                        </div>
+                        <p class="gate-desc">Device and components are no longer suitable for reuse.</p>
+                        <div class="gate-path">Material Recovery &rarr; Certified Recycling Partner</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. DEVICE PASSPORT -->
+            <section id="passport" class="page">
+                <div class="passport-card">
+                    <div class="passport-header">
+                        <div class="passport-title">
+                            <h2>DEVICE PASSPORT</h2>
+                            <p>ID: RG-2026-001</p>
+                        </div>
+                        <div class="badge in-repair">IN REPAIR LOOP</div>
+                    </div>
+
+                    <div class="passport-body">
+                        <div class="passport-info">
+                            <p><strong>Device:</strong> Lenovo ThinkPad T480</p>
+                            <p><strong>Category:</strong> Laptop</p>
+                            <p><strong>Current Condition:</strong> Repairable</p>
+                            <p><strong>Repairability Score:</strong> 86/100</p>
+                            <p><strong>Repair History:</strong> Battery Replacement</p>
+                        </div>
+                        <div class="passport-components">
+                            <div class="comp-list">
+                                <h4>Reusable Components</h4>
+                                <ul>
+                                    <li><i data-lucide="check"></i> RAM</li>
+                                    <li><i data-lucide="check"></i> SSD</li>
+                                    <li><i data-lucide="check"></i> Cooling Fan</li>
+                                    <li><i data-lucide="check"></i> Keyboard</li>
+                                </ul>
+                            </div>
+                            <div class="comp-list">
+                                <h4>Non-Reusable</h4>
+                                <ul>
+                                    <li class="fail"><i data-lucide="x"></i> Battery</li>
+                                    <li class="fail"><i data-lucide="x"></i> LCD Panel</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-step completed">
+                            <div class="step-dot"></div>
+                            <p>Registered</p>
+                        </div>
+                        <div class="timeline-step completed">
+                            <div class="step-dot"></div>
+                            <p>Scanned</p>
+                        </div>
+                        <div class="timeline-step completed">
+                            <div class="step-dot"></div>
+                            <p>Assessed</p>
+                        </div>
+                        <div class="timeline-step active-step">
+                            <div class="step-dot"></div>
+                            <p>Repair / Harvest</p>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="step-dot"></div>
+                            <p>Second Life</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. DEVICE HEALTH -->
+            <section id="health" class="page">
+                <div class="health-container">
+                    <div class="health-header">
+                        <h2>Overall Device Health</h2>
+                        <h2 class="health-score">78%</h2>
+                    </div>
+                    
+                    <div class="health-grid">
+                        <div class="health-item">
+                            <div class="health-info"><span>Battery Health</span><span>45%</span></div>
+                            <div class="progress-bar"><div class="progress warn" style="width: 45%;"></div></div>
+                        </div>
+                        <div class="health-item">
+                            <div class="health-info"><span>Storage Health</span><span>92%</span></div>
+                            <div class="progress-bar"><div class="progress good" style="width: 92%;"></div></div>
+                        </div>
+                        <div class="health-item">
+                            <div class="health-info"><span>Display</span><span>95%</span></div>
+                            <div class="progress-bar"><div class="progress good" style="width: 95%;"></div></div>
+                        </div>
+                        <div class="health-item">
+                            <div class="health-info"><span>Cooling System</span><span>88%</span></div>
+                            <div class="progress-bar"><div class="progress good" style="width: 88%;"></div></div>
+                        </div>
+                        <div class="health-item">
+                            <div class="health-info"><span>RAM</span><span>100%</span></div>
+                            <div class="progress-bar"><div class="progress good" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="health-item">
+                            <div class="health-info"><span>Physical Condition</span><span>65%</span></div>
+                            <div class="progress-bar"><div class="progress average" style="width: 65%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. REPAIR MATCH -->
+            <section id="match" class="page">
+                <div class="repair-match-card">
+                    <div class="match-header">
+                        <h2>Repair Solution Found</h2>
+                        <span class="badge high-priority">High Priority</span>
+                    </div>
+                    
+                    <div class="match-details">
+                        <div class="match-row">
+                            <span class="muted">Identified Problem:</span>
+                            <strong>Battery degradation</strong>
+                        </div>
+                        <div class="match-row">
+                            <span class="muted">Recommended Action:</span>
+                            <strong>Battery replacement</strong>
+                        </div>
+                        <div class="match-row">
+                            <span class="muted">Required Component:</span>
+                            <strong>ThinkPad T480 Internal Battery (6-cell)</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="match-economics">
+                        <div class="eco-box">
+                            <p>Estimated Repair Cost</p>
+                            <h4>Rp 350.000</h4>
+                        </div>
+                        <div class="eco-box positive">
+                            <p>Est. Refurbished Value</p>
+                            <h4>Rp 3.200.000</h4>
+                        </div>
+                    </div>
+
+                    <div class="circular-benefit">
+                        <i data-lucide="leaf"></i>
+                        <p><strong>Circular Benefit:</strong> Laptop life extended by approximately 3 years.</p>
+                    </div>
+
+                    <button class="btn btn-primary full-width">Find Repair Partner</button>
+                </div>
+            </section>
+
+            <!-- 7. CIRCULAR PART BANK -->
+            <section id="part-bank" class="page">
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="memory">Memory</button>
+                    <button class="filter-btn" data-filter="storage">Storage</button>
+                    <button class="filter-btn" data-filter="cooling">Cooling</button>
+                    <button class="filter-btn" data-filter="input">Input</button>
+                </div>
+
+                <div class="part-grid" id="part-grid">
+                    <!-- Cards populated via JS -->
+                </div>
+            </section>
+
+            <!-- 8. CIRCULAR ROUTE -->
+            <section id="route" class="page">
+                <div class="route-container">
+                    <div class="route-box source">Laptop Waste</div>
+                    <div class="vertical-line"></div>
+                    <div class="route-box process">AI Scan</div>
+                    <div class="vertical-line"></div>
+                    <div class="route-box process">Condition Assessment</div>
+                    <div class="vertical-line"></div>
+                    <div class="route-box gate-decision">Repairability Gate</div>
+                    
+                    <div class="branch-container">
+                        <div class="branch">
+                            <div class="branch-line"></div>
+                            <div class="route-box path-green">Repair</div>
+                            <div class="vertical-line"></div>
+                            <div class="route-box path-green">Refurbishment</div>
+                            <div class="vertical-line"></div>
+                            <div class="route-box path-green end">Second-Life Laptop</div>
+                        </div>
+                        
+                        <div class="branch">
+                            <div class="branch-line center-line"></div>
+                            <div class="route-box path-yellow">Component Harvest</div>
+                            <div class="vertical-line"></div>
+                            <div class="route-box path-yellow">Circular Part Bank</div>
+                            <div class="vertical-line"></div>
+                            <div class="route-box path-yellow end">Reuse / New Product</div>
+                        </div>
+
+                        <div class="branch">
+                            <div class="branch-line"></div>
+                            <div class="route-box path-red">Material Separation</div>
+                            <div class="vertical-line"></div>
+                            <div class="route-box path-red end">Certified Recycling</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. VALUE LOOP -->
+            <section id="value-loop" class="page">
+                <div class="value-loop-container">
+                    <h2 class="text-center loop-title">The earlier the intervention, the more value can be preserved.</h2>
+                    
+                    <div class="value-pyramid">
+                        <div class="pyramid-tier tier-1">
+                            <div class="tier-info">
+                                <h3>DEVICE VALUE</h3>
+                                <p>Refurbished / Repaired Laptop</p>
+                            </div>
+                            <div class="tier-value">Rp 3.200.000</div>
+                        </div>
+                        <div class="pyramid-tier tier-2">
+                            <div class="tier-info">
+                                <h3>FUNCTIONAL VALUE</h3>
+                                <p>Recovered Functional Components</p>
+                            </div>
+                            <div class="tier-value">Rp 1.800.000</div>
+                        </div>
+                        <div class="pyramid-tier tier-3">
+                            <div class="tier-info">
+                                <h3>MATERIAL VALUE</h3>
+                                <p>Raw Material Recycling</p>
+                            </div>
+                            <div class="tier-value">Rp 400.000</div>
+                        </div>
+                    </div>
+
+                    <div class="original-value">
+                        Original Device Value: <strong>Rp 4.000.000</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 10. IMPACT DASHBOARD -->
+            <section id="impact" class="page">
+                <div class="impact-grid">
+                    <div class="impact-card">
+                        <div class="impact-val">126 kg</div>
+                        <div class="impact-label">E-Waste Avoided</div>
+                        <i data-lucide="trash" class="bg-icon"></i>
+                    </div>
+                    <div class="impact-card">
+                        <div class="impact-val">48</div>
+                        <div class="impact-label">Laptops Given a Second Life</div>
+                        <i data-lucide="laptop" class="bg-icon"></i>
+                    </div>
+                    <div class="impact-card">
+                        <div class="impact-val">148</div>
+                        <div class="impact-label">Components Recovered</div>
+                        <i data-lucide="cpu" class="bg-icon"></i>
+                    </div>
+                    <div class="impact-card">
+                        <div class="impact-val">Rp 4.2M</div>
+                        <div class="impact-label">Economic Value Preserved</div>
+                        <i data-lucide="coins" class="bg-icon"></i>
+                    </div>
+                    <div class="impact-card full-width-impact">
+                        <div class="circularity-score">
+                            <h2>75%</h2>
+                            <p>Platform Circularity Score</p>
+                            <div class="progress-bar"><div class="progress" style="width: 75%; background-color: var(--accent);"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

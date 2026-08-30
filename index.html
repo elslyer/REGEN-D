@@ -3,215 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REGEN-D | Circular Laptop Ecosystem</title>
+    <title>REGEN-D | Circular E-Waste Platform</title>
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <div class="logo">
-            <i data-lucide="recycle" class="logo-icon"></i>
-            <h2>REGEN-D</h2>
+    <nav class="sidebar">
+        <div class="brand">
+            <div class="logo-box"><i data-lucide="leaf"></i></div>
+            <span>REGEN-D</span>
         </div>
-        <nav class="nav-menu">
-            <a href="#" class="nav-item active" data-target="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</a>
-            <a href="#" class="nav-item" data-target="scanner"><i data-lucide="scan-line"></i> AI Scanner</a>
-            <a href="#" class="nav-item" data-target="gate"><i data-lucide="traffic-cone"></i> Repair Gate</a>
-            <a href="#" class="nav-item" data-target="passport"><i data-lucide="book-open-check"></i> Passport</a>
-            <a href="#" class="nav-item" data-target="health"><i data-lucide="activity"></i> Device Health</a>
+        <div class="nav-links">
+            <a href="#" class="nav-item active" data-target="dashboard"><i data-lucide="layout-grid"></i> Overview</a>
+            <a href="#" class="nav-item" data-target="scanner"><i data-lucide="scan"></i> AI Scanner</a>
+            <a href="#" class="nav-item" data-target="gate"><i data-lucide="split"></i> Repairability Gate</a>
+            <a href="#" class="nav-item" data-target="passport"><i data-lucide="fingerprint"></i> Device Passport</a>
+            <a href="#" class="nav-item" data-target="health"><i data-lucide="heart-pulse"></i> Device Health</a>
             <a href="#" class="nav-item" data-target="match"><i data-lucide="wrench"></i> Repair Match</a>
-            <a href="#" class="nav-item" data-target="part-bank"><i data-lucide="cpu"></i> Part Bank</a>
-            <a href="#" class="nav-item" data-target="route"><i data-lucide="git-branch"></i> Circular Route</a>
-            <a href="#" class="nav-item" data-target="value-loop"><i data-lucide="circle-dollar-sign"></i> Value Loop</a>
-            <a href="#" class="nav-item" data-target="impact"><i data-lucide="leaf"></i> Impact</a>
-        </nav>
-    </aside>
+            <a href="#" class="nav-item" data-target="bank"><i data-lucide="database"></i> Circular Part Bank</a>
+            <a href="#" class="nav-item" data-target="route"><i data-lucide="network"></i> Circular Route</a>
+            <a href="#" class="nav-item" data-target="value"><i data-lucide="layers"></i> Value Loop</a>
+            <a href="#" class="nav-item" data-target="impact"><i data-lucide="globe-2"></i> Impact</a>
+        </div>
+    </nav>
 
-    <!-- MAIN CONTENT -->
-    <main class="main-content">
-        <!-- TOPBAR -->
-        <header class="topbar">
-            <h1 id="page-title">Dashboard</h1>
-            <div class="topbar-actions">
-                <button class="btn btn-primary" onclick="openModal('registerModal')"><i data-lucide="plus-circle"></i> Register Device</button>
-                <div class="icon-btn interactive-hover"><i data-lucide="bell"></i></div>
-                <div class="user-profile interactive-hover">
-                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=103A36&color=fff" alt="User">
+    <!-- MAIN APP AREA -->
+    <main class="app-area">
+        <header class="top-nav">
+            <h1 id="page-title">Overview Dashboard</h1>
+            <div class="top-actions">
+                <button class="btn-primary" onclick="goToScanner()"><i data-lucide="plus"></i> Scan Device</button>
+                <div class="avatar">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=RegenD" alt="User">
                 </div>
             </div>
         </header>
 
-        <div class="page-container">
+        <div class="content-wrapper">
+            
             <!-- 1. DASHBOARD -->
             <section id="dashboard" class="page active">
-                <div class="grid-stats">
-                    <div class="stat-card stagger-item">
-                        <div class="stat-icon"><i data-lucide="laptop"></i></div>
-                        <div class="stat-info"><p>Registered</p><h3>24</h3></div>
+                <div class="bento-grid">
+                    <div class="bento-card hero-card">
+                        <h3>Circularity Score</h3>
+                        <div class="big-metric">78<span>%</span></div>
+                        <p>Platform overall efficiency in preserving e-waste value.</p>
                     </div>
-                    <div class="stat-card stagger-item">
-                        <div class="stat-icon"><i data-lucide="wrench"></i></div>
-                        <div class="stat-info"><p>Repair Opps</p><h3>12</h3></div>
+                    <div class="bento-card">
+                        <i data-lucide="laptop" class="card-icon"></i>
+                        <p class="label">Registered Devices</p>
+                        <h4>142</h4>
                     </div>
-                    <div class="stat-card stagger-item">
-                        <div class="stat-icon"><i data-lucide="cpu"></i></div>
-                        <div class="stat-info"><p>Recovered</p><h3>148</h3></div>
+                    <div class="bento-card">
+                        <i data-lucide="wrench" class="card-icon"></i>
+                        <p class="label">Repair Opportunities</p>
+                        <h4>56</h4>
                     </div>
-                    <div class="stat-card highlight stagger-item">
-                        <div class="stat-icon"><i data-lucide="banknote"></i></div>
-                        <div class="stat-info"><p>Value Recovered</p><h3>Rp 4.2M</h3></div>
+                    <div class="bento-card">
+                        <i data-lucide="cpu" class="card-icon"></i>
+                        <p class="label">Recovered Components</p>
+                        <h4>890</h4>
                     </div>
-                    <div class="stat-card stagger-item">
-                        <div class="stat-icon"><i data-lucide="trash-2"></i></div>
-                        <div class="stat-info"><p>E-Waste Avoided</p><h3>126 kg</h3></div>
-                    </div>
-                    <div class="stat-card highlight-alt stagger-item">
-                        <div class="stat-icon"><i data-lucide="refresh-cw"></i></div>
-                        <div class="stat-info"><p>Circularity</p><h3>75%</h3></div>
+                    <div class="bento-card col-span-2">
+                        <h3>Recent Activities</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="dot green"></div>
+                                <p><strong>ThinkPad T480</strong> entered Regenerate path.</p>
+                                <span>2 mins ago</span>
+                            </div>
+                            <div class="activity-item">
+                                <div class="dot yellow"></div>
+                                <p><strong>8GB DDR4 RAM</strong> added to Circular Part Bank.</p>
+                                <span>15 mins ago</span>
+                            </div>
+                            <div class="activity-item">
+                                <div class="dot red"></div>
+                                <p><strong>Broken Motherboard</strong> sent to Certified Recycling.</p>
+                                <span>1 hr ago</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 2. AI LAPTOP SCANNER -->
+            <!-- 2. AI SCANNER -->
             <section id="scanner" class="page">
-                <div class="scanner-container stagger-item">
-                    <div class="upload-zone interactive-hover" id="upload-zone" onclick="startScan()">
-                        <i data-lucide="image-plus"></i>
-                        <h3>Click to Upload & Scan</h3>
-                        <p>Simulate AI Inspection</p>
+                <div class="scanner-wrap">
+                    <div class="upload-area" id="upload-area" onclick="runAIScan()">
+                        <div class="upload-icon"><i data-lucide="camera"></i></div>
+                        <h2>Upload Laptop Image</h2>
+                        <p>Click to simulate AI visual assessment</p>
                     </div>
 
-                    <div class="scanning-ui hidden" id="scanning-ui">
-                        <div class="scanner-frame">
-                            <div class="scan-line"></div>
-                            <i data-lucide="laptop" class="large-icon pulse-icon"></i>
+                    <div class="scanning-loader hidden" id="scanning-loader">
+                        <div class="scan-box">
+                            <div class="laser"></div>
+                            <i data-lucide="laptop"></i>
                         </div>
-                        <h3 class="pulse-text">AI Neural Network Analyzing...</h3>
+                        <h3>Analyzing physical conditions...</h3>
                     </div>
 
-                    <div class="scan-results hidden" id="scan-results">
-                        <div class="result-header">
-                            <div><p class="muted">Detected Device</p><h2>Lenovo ThinkPad T480</h2></div>
-                            <div class="score-circle"><span class="score-num">86</span><span class="score-max">/ 100</span></div>
+                    <div class="scan-result hidden" id="scan-result">
+                        <div class="result-top">
+                            <div class="device-id">
+                                <p class="label">Detected Model</p>
+                                <h2>Dell Latitude 7490</h2>
+                            </div>
+                            <div class="score-ring">
+                                <h3>65</h3>
+                                <span>/ 100</span>
+                            </div>
                         </div>
-                        <div class="conditions-grid">
-                            <div class="condition-item good stagger-item"><i data-lucide="check-circle"></i> Screen: Good</div>
-                            <div class="condition-item good stagger-item"><i data-lucide="check-circle"></i> Keyboard: Good</div>
-                            <div class="condition-item warn stagger-item"><i data-lucide="alert-triangle"></i> Battery: Degraded</div>
-                            <div class="condition-item good stagger-item"><i data-lucide="check-circle"></i> RAM: Functional</div>
-                            <div class="condition-item good stagger-item"><i data-lucide="check-circle"></i> Storage: Functional</div>
-                            <div class="condition-item warn stagger-item"><i data-lucide="alert-triangle"></i> Casing: Minor damage</div>
+                        <div class="condition-chips">
+                            <div class="chip green"><i data-lucide="check"></i> Screen: Intact</div>
+                            <div class="chip green"><i data-lucide="check"></i> Keyboard: Good</div>
+                            <div class="chip yellow"><i data-lucide="alert-circle"></i> Battery: Swollen</div>
+                            <div class="chip red"><i data-lucide="x"></i> Casing: Cracked</div>
                         </div>
-                        <div class="recommendation-box stagger-item">
-                            <p class="muted">Recommended Path</p><h3>REPAIR + REFURBISH</h3>
+                        <div class="disclaimer">
+                            <i data-lucide="info"></i>
+                            <p><strong>Disclaimer:</strong> AI provides preliminary visual screening only. Final technical diagnosis requires technician validation.</p>
                         </div>
-                        <button class="btn btn-secondary full-width stagger-item" onclick="resetScan()">Reset Scanner</button>
+                        <button class="btn-primary w-full" onclick="resetScan()">Scan Another Device</button>
                     </div>
                 </div>
             </section>
 
             <!-- 3. REPAIRABILITY GATE -->
             <section id="gate" class="page">
-                <div class="gate-grid">
-                    <div class="gate-card gate-green stagger-item">
-                        <div class="gate-header"><div class="light green-light"></div><h2>REGENERATE</h2></div>
-                        <p class="gate-desc">Feasible to repair and restore.</p>
-                        <div class="gate-path">Repair &rarr; Refurbish &rarr; Second Life</div>
+                <div class="gate-container">
+                    <div class="gate-card green-path">
+                        <div class="gate-head">
+                            <div class="traffic-light tl-green"></div>
+                            <h2>REGENERATE</h2>
+                        </div>
+                        <p>Technically and economically feasible to repair.</p>
+                        <div class="flow-steps">Repair → Upgrade → Refurbish → Second Life</div>
                     </div>
-                    <div class="gate-card gate-yellow stagger-item">
-                        <div class="gate-header"><div class="light yellow-light pulse-light"></div><h2>HARVEST</h2></div>
-                        <p class="gate-desc">Harvest functional components.</p>
-                        <div class="gate-path">Harvesting &rarr; Part Bank &rarr; Reuse</div>
+                    
+                    <div class="gate-card yellow-path">
+                        <div class="gate-head">
+                            <div class="traffic-light tl-yellow"></div>
+                            <h2>HARVEST</h2>
+                        </div>
+                        <p>Device cannot be fully restored, but contains valuable functional components.</p>
+                        <div class="flow-steps">Dismantle → Circular Part Bank → Component Reuse</div>
                     </div>
-                    <div class="gate-card gate-red stagger-item">
-                        <div class="gate-header"><div class="light red-light"></div><h2>RECYCLE</h2></div>
-                        <p class="gate-desc">No longer suitable for reuse.</p>
-                        <div class="gate-path">Material Recovery &rarr; Recycling</div>
+
+                    <div class="gate-card red-path">
+                        <div class="gate-head">
+                            <div class="traffic-light tl-red"></div>
+                            <h2>RECYCLE</h2>
+                        </div>
+                        <p>Device and components are no longer suitable for any reuse.</p>
+                        <div class="flow-steps">Material Recovery → Certified Recycling</div>
                     </div>
                 </div>
             </section>
 
-            <!-- 4. PASSPORT (Rest of sections shortened for brevity, structure remains same as previous, just adding stagger-item class) -->
+            <!-- 4. DEVICE PASSPORT -->
             <section id="passport" class="page">
-                <div class="passport-card stagger-item">
+                <div class="passport-ui">
                     <div class="passport-header">
-                        <div><h2>DEVICE PASSPORT</h2><p>ID: RG-2026-001</p></div>
-                        <div class="badge in-repair">IN REPAIR LOOP</div>
+                        <div class="pt-left">
+                            <span class="tag">Digital Identity</span>
+                            <h2>RG-8472-X</h2>
+                        </div>
+                        <div class="pt-status yellow">CIRCULAR STATUS: HARVESTING</div>
                     </div>
-                    <div class="passport-body">
-                        <div class="passport-info">
-                            <p><strong>Device:</strong> Lenovo ThinkPad T480</p>
-                            <p><strong>Condition:</strong> Repairable</p>
-                            <p><strong>Score:</strong> 86/100</p>
+                    
+                    <div class="passport-grid">
+                        <div class="p-info">
+                            <p><strong>Model:</strong> HP EliteBook 840 G5</p>
+                            <p><strong>Condition:</strong> Non-bootable, Mainboard fault</p>
+                            <p><strong>Repairability Score:</strong> 35/100</p>
+                            <p><strong>Repair History:</strong> Screen replaced (2024)</p>
+                        </div>
+                        
+                        <div class="p-components">
+                            <h4>Component Triage</h4>
+                            <div class="triage-list">
+                                <span class="t-good"><i data-lucide="check"></i> 16GB RAM</span>
+                                <span class="t-good"><i data-lucide="check"></i> 512GB SSD</span>
+                                <span class="t-good"><i data-lucide="check"></i> Cooling Fan</span>
+                                <span class="t-bad"><i data-lucide="x"></i> Mainboard</span>
+                                <span class="t-bad"><i data-lucide="x"></i> Battery</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="timeline">
-                        <div class="timeline-step completed"><div class="step-dot"></div><p>Registered</p></div>
-                        <div class="timeline-step completed"><div class="step-dot"></div><p>Scanned</p></div>
-                        <div class="timeline-step completed"><div class="step-dot"></div><p>Assessed</p></div>
-                        <div class="timeline-step active-step"><div class="step-dot pulse-light"></div><p>Repair</p></div>
-                        <div class="timeline-step"><div class="step-dot"></div><p>Second Life</p></div>
+
+                    <div class="lifecycle-timeline">
+                        <div class="timeline-node done">Registered</div>
+                        <div class="timeline-node done">Scanned</div>
+                        <div class="timeline-node done">Assessed</div>
+                        <div class="timeline-node active">Harvesting</div>
+                        <div class="timeline-node">Part Bank</div>
                     </div>
                 </div>
             </section>
 
-            <!-- 5. DEVICE HEALTH (Dynamic Progress Bars) -->
+            <!-- 5. DEVICE HEALTH -->
             <section id="health" class="page">
-                <div class="health-container stagger-item">
-                    <div class="health-header"><h2>Device Health</h2><h2 class="health-score">78%</h2></div>
-                    <div class="health-grid">
-                        <div class="health-item"><div class="health-info"><span>Battery</span><span>45%</span></div><div class="progress-bar"><div class="progress warn" data-width="45%"></div></div></div>
-                        <div class="health-item"><div class="health-info"><span>Storage</span><span>92%</span></div><div class="progress-bar"><div class="progress good" data-width="92%"></div></div></div>
-                        <div class="health-item"><div class="health-info"><span>Display</span><span>95%</span></div><div class="progress-bar"><div class="progress good" data-width="95%"></div></div></div>
+                <div class="health-ui">
+                    <div class="overall-health">
+                        <h2>Overall Health Score</h2>
+                        <div class="health-big-num">82%</div>
+                    </div>
+                    
+                    <div class="health-bars">
+                        <div class="h-bar"><div class="h-label"><span>Power</span><span>100%</span></div><div class="track"><div class="fill green" style="width:100%"></div></div></div>
+                        <div class="h-bar"><div class="h-label"><span>Battery</span><span>45%</span></div><div class="track"><div class="fill red" style="width:45%"></div></div></div>
+                        <div class="h-bar"><div class="h-label"><span>Display</span><span>95%</span></div><div class="track"><div class="fill green" style="width:95%"></div></div></div>
+                        <div class="h-bar"><div class="h-label"><span>Keyboard</span><span>100%</span></div><div class="track"><div class="fill green" style="width:100%"></div></div></div>
+                        <div class="h-bar"><div class="h-label"><span>Storage</span><span>88%</span></div><div class="track"><div class="fill yellow" style="width:88%"></div></div></div>
+                        <div class="h-bar"><div class="h-label"><span>RAM</span><span>100%</span></div><div class="track"><div class="fill green" style="width:100%"></div></div></div>
+                        <div class="h-bar"><div class="h-label"><span>Cooling System</span><span>70%</span></div><div class="track"><div class="fill yellow" style="width:70%"></div></div></div>
+                        <div class="h-bar"><div class="h-label"><span>Physical Condition</span><span>80%</span></div><div class="track"><div class="fill green" style="width:80%"></div></div></div>
                     </div>
                 </div>
             </section>
 
             <!-- 6. REPAIR MATCH -->
             <section id="match" class="page">
-                <div class="repair-match-card stagger-item interactive-hover">
-                    <div class="match-header"><h2>Repair Solution</h2><span class="badge high-priority">High Priority</span></div>
-                    <div class="match-details">
-                        <div class="match-row"><span class="muted">Problem:</span><strong>Battery degradation</strong></div>
-                        <div class="match-row"><span class="muted">Action:</span><strong>Battery replacement</strong></div>
+                <div class="match-ui">
+                    <div class="match-problem">
+                        <h3><i data-lucide="alert-triangle"></i> Issue Detected: Battery Degradation</h3>
+                        <p>The battery capacity has fallen below 50% and is exhibiting slight swelling.</p>
                     </div>
-                    <div class="match-economics">
-                        <div class="eco-box"><p>Cost</p><h4>Rp 350.000</h4></div>
-                        <div class="eco-box positive"><p>Refurbished Value</p><h4>Rp 3.200.000</h4></div>
+                    <div class="match-solution">
+                        <div class="sol-row"><strong>Action:</strong> Replace Battery Module</div>
+                        <div class="sol-row"><strong>Required Part:</strong> Dell 42Wh 3-Cell Battery (Recovered or New)</div>
                     </div>
-                    <button class="btn btn-primary full-width">Find Repair Partner</button>
+                    <div class="match-eco">
+                        <div class="eco-card">
+                            <p>Estimated Repair Cost</p>
+                            <h4>Rp 450.000</h4>
+                        </div>
+                        <div class="eco-card">
+                            <p>Est. Recovered Value</p>
+                            <h4 class="text-green">Rp 3.800.000</h4>
+                        </div>
+                    </div>
+                    <div class="match-benefit">
+                        <i data-lucide="leaf"></i>
+                        <p><strong>Circular Benefit:</strong> This repair extends the laptop's usable life by ~3 years and prevents 1.5kg of e-waste.</p>
+                    </div>
+                    <button class="btn-primary w-full"><i data-lucide="search"></i> Find Repair Partner</button>
                 </div>
             </section>
 
             <!-- 7. CIRCULAR PART BANK -->
-            <section id="part-bank" class="page">
-                <div class="filters stagger-item">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="memory">Memory</button>
-                    <button class="filter-btn" data-filter="storage">Storage</button>
-                    <button class="filter-btn" data-filter="cooling">Cooling</button>
+            <section id="bank" class="page">
+                <div class="bank-filters">
+                    <button class="filter-btn active" data-cat="all">All Parts</button>
+                    <button class="filter-btn" data-cat="memory">Memory</button>
+                    <button class="filter-btn" data-cat="storage">Storage</button>
+                    <button class="filter-btn" data-cat="cooling">Cooling</button>
+                    <div class="search-box">
+                        <i data-lucide="search"></i>
+                        <input type="text" placeholder="Search components...">
+                    </div>
                 </div>
+
                 <div class="part-grid" id="part-grid">
-                    <!-- Injected via JS -->
+                    <!-- Populated by JS -->
                 </div>
             </section>
-            
-            <!-- (Route, Value Loop, Impact sama seperti sebelumnya, lewati untuk mempersingkat output, tapi sertakan elemen progress bar dinamis) -->
-             <!-- 10. IMPACT DASHBOARD -->
-             <section id="impact" class="page">
+
+            <!-- 8. CIRCULAR ROUTE -->
+            <section id="route" class="page">
+                <div class="route-diagram">
+                    <div class="node source">Laptop E-Waste</div>
+                    <div class="line vertical"></div>
+                    <div class="node process">AI Scanning & Assessment</div>
+                    <div class="line vertical"></div>
+                    <div class="node gate">Repairability Gate</div>
+                    
+                    <div class="branches">
+                        <div class="branch">
+                            <div class="line-connector left"></div>
+                            <div class="node green-path">Repair Path</div>
+                            <div class="line vertical"></div>
+                            <div class="node green-path">Refurbishment</div>
+                            <div class="line vertical"></div>
+                            <div class="node target">Second-Life Reuse</div>
+                        </div>
+                        <div class="branch">
+                            <div class="line-connector center"></div>
+                            <div class="node yellow-path">Harvest Path</div>
+                            <div class="line vertical"></div>
+                            <div class="node yellow-path">Circular Part Bank</div>
+                            <div class="line vertical"></div>
+                            <div class="node target">Component Reuse / Upcycle</div>
+                        </div>
+                        <div class="branch">
+                            <div class="line-connector right"></div>
+                            <div class="node red-path">Recycle Path</div>
+                            <div class="line vertical"></div>
+                            <div class="node red-path">Material Separation</div>
+                            <div class="line vertical"></div>
+                            <div class="node target bg-red">Certified Recycling</div>
+                        </div>
+                    </div>
+                    <p class="route-caption">Recycling is strictly the final option after higher-value strategies have been exhausted.</p>
+                </div>
+            </section>
+
+            <!-- 9. VALUE LOOP -->
+            <section id="value" class="page">
+                <div class="value-loop-ui">
+                    <h2 class="text-center">Earlier Intervention Preserves More Value</h2>
+                    <div class="pyramid-container">
+                        <div class="pyramid-layer layer-1">
+                            <div class="l-text">
+                                <h3>Functional Device</h3>
+                                <span>Highest Value</span>
+                            </div>
+                            <div class="l-val">Rp 4.000.000</div>
+                        </div>
+                        <div class="pyramid-layer layer-2">
+                            <div class="l-text">
+                                <h3>Repaired / Refurbished</h3>
+                                <span>High Value</span>
+                            </div>
+                            <div class="l-val">Rp 3.500.000</div>
+                        </div>
+                        <div class="pyramid-layer layer-3">
+                            <div class="l-text">
+                                <h3>Reusable Components</h3>
+                                <span>Medium Value</span>
+                            </div>
+                            <div class="l-val">Rp 1.200.000</div>
+                        </div>
+                        <div class="pyramid-layer layer-4">
+                            <div class="l-text">
+                                <h3>Material Recycling</h3>
+                                <span>Lowest Value</span>
+                            </div>
+                            <div class="l-val">Rp 150.000</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 10. IMPACT DASHBOARD -->
+            <section id="impact" class="page">
                 <div class="impact-grid">
-                    <div class="impact-card stagger-item"><div class="impact-val">126 kg</div><div class="impact-label">E-Waste Avoided</div><i data-lucide="trash" class="bg-icon"></i></div>
-                    <div class="impact-card stagger-item"><div class="impact-val">48</div><div class="impact-label">Second Life</div><i data-lucide="laptop" class="bg-icon"></i></div>
-                    <div class="impact-card stagger-item"><div class="impact-val">148</div><div class="impact-label">Components</div><i data-lucide="cpu" class="bg-icon"></i></div>
-                    <div class="impact-card full-width-impact stagger-item">
-                        <div class="circularity-score">
-                            <h2>75%</h2><p>Circularity Score</p>
-                            <div class="progress-bar"><div class="progress" data-width="75%" style="background-color: var(--accent);"></div></div>
+                    <div class="impact-card">
+                        <i data-lucide="trash-2" class="bg-icon"></i>
+                        <div class="i-val">450 <span class="unit">kg</span></div>
+                        <div class="i-label">E-Waste Avoided</div>
+                    </div>
+                    <div class="impact-card">
+                        <i data-lucide="laptop-2" class="bg-icon"></i>
+                        <div class="i-val">128</div>
+                        <div class="i-label">Laptops Given Second Life</div>
+                    </div>
+                    <div class="impact-card">
+                        <i data-lucide="cpu" class="bg-icon"></i>
+                        <div class="i-val">890</div>
+                        <div class="i-label">Components Recovered</div>
+                    </div>
+                    <div class="impact-card">
+                        <i data-lucide="wallet" class="bg-icon"></i>
+                        <div class="i-val">Rp 125M</div>
+                        <div class="i-label">Economic Value Preserved</div>
+                    </div>
+                    <div class="impact-card full">
+                        <h2>Every laptop entering this system has multiple opportunities to create value before becoming waste.</h2>
+                        <div class="circularity-bar">
+                            <div class="c-label">Platform Circularity Rate</div>
+                            <div class="track"><div class="fill theme" style="width: 78%">78%</div></div>
                         </div>
                     </div>
                 </div>
@@ -219,22 +389,6 @@
 
         </div>
     </main>
-
-    <!-- MODAL OVERLAY -->
-    <div id="modalOverlay" class="modal-overlay hidden" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <div class="modal-header">
-                <h3 id="modalTitle">Register Device</h3>
-                <i data-lucide="x" class="close-btn" onclick="closeModal()"></i>
-            </div>
-            <div class="modal-body" id="modalBody">
-                <p>Simulate connecting to ERP / Registry system...</p>
-                <div style="margin-top:20px; text-align:center;">
-                    <i data-lucide="loader" class="spin-icon"></i>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="script.js"></script>
 </body>
